@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós | Vincofer</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; overflow-x: hidden; cursor: none; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #6366f1; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(99, 102, 241, 0.5); transition: all 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(99, 102, 241, 0.1); }
+        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px); }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <header class="w-full py-4 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
+                <i class="ph-bold ph-arrow-left text-indigo-500 text-2xl"></i>
+                <span class="text-white font-bold text-sm uppercase tracking-widest">Voltar ao site</span>
+            </a>
+            <img src="logo.svg" alt="Vincofer" class="h-8 w-auto invert">
+        </div>
+    </header>
+
+    <section class="pt-24 pb-12 px-6 max-w-4xl mx-auto text-center" data-aos="fade-up">
+        <span class="text-indigo-500 font-bold tracking-widest uppercase text-sm mb-4 block">O Manifesto Vincofer</span>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white mb-8 leading-tight">A intersecção exata entre código e arte.</h1>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-6 mb-16" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="Equipe de alta performance" class="w-full h-[400px] object-cover rounded-3xl shadow-2xl border border-slate-800">
+    </div>
+
+    <article class="px-6 max-w-3xl mx-auto text-lg text-slate-300 space-y-8 leading-relaxed mb-32" data-aos="fade-up" data-aos-delay="200">
+        <p class="text-2xl text-white font-medium mb-8 leading-relaxed">
+            Nascemos de uma inconformidade com o mercado tradicional de agências. Onde a maioria foca em métricas de vaidade, nós focamos na engenharia de vendas.
+        </p>
+
+        <p>
+            A visão criativa da Vincofer, guiada por Vinícius F. (Chief Creative Officer), foi estruturada a partir de uma base não convencional para o mercado publicitário: a união entre a <strong>Engenharia da Computação e as Ciências Econômicas</strong>. Essa dualidade moldou nosso DNA. Tratamos criativos e assets visuais com sensibilidade artística, mas gerenciamos orçamentos e escalas de tráfego com rigor analítico e matemático.
+        </p>
+
+        <div class="bg-slate-900/50 p-8 rounded-2xl border-l-4 border-indigo-500 my-10">
+            <h4 class="text-xl font-bold text-white mb-3">Velocidade e Alta Performance</h4>
+            <p class="text-slate-400 text-base">Assim como a precisão mecânica exigida em veículos de luxo e motocicletas de alta cilindrada, aplicamos essa mesma mentalidade aos nossos processos internos. Somos obcecados pela redução de atrito e pelo aumento da eficiência.</p>
+        </div>
+
+        <h3 class="text-3xl text-white font-bold mt-12 mb-6">Do Digital para o Físico</h3>
+        <p>
+            Entendemos que grandes marcas não vivem apenas nas telas. É por isso que nossa estrutura conta com setores de modelagem avançada, permitindo a transição do software 3D para o mundo real através de tecnologias de prototipagem física e impressão 3D (utilizando maquinário de precisão). Criamos a experiência completa: do render digital ao objeto tátil.
+        </p>
+        <p>
+            Nosso compromisso não é apenas entregar anúncios; é assumir a direção de arte e os números do seu negócio, tratando cada centavo investido com a mesma seriedade que tratamos a estética visual de nossas produções.
+        </p>
+    </article>
+
+    <footer class="bg-[#01040f] py-8 border-t border-slate-800 text-center text-slate-500 text-sm">
+        <p>© 2026 Vincofer. Todos os direitos reservados. CNPJ: 47.334.012/0001-16</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 800 });
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
