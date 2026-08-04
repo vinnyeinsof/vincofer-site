@@ -3,216 +3,646 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vincofer | Agência de Marketing Digital de Alta Performance</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Vincofer | Agência de Marketing Digital & Direção de Arte</title>
     
-    <!-- Biblioteca AOS para animações de rolagem -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons (Ícones modernos) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- AOS Animate On Scroll -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        /* Animação de flutuação suave para imagens */
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        :root {
+            --color-bg: #020617; /* slate-950 */
+            --color-primary: #6366f1; /* indigo-500 */
+            --color-secondary: #a855f7; /* purple-500 */
         }
 
-        /* Animação do gradiente de texto */
-        .animate-gradient {
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--color-bg);
+            color: #f8fafc;
+            overflow-x: hidden;
+            cursor: none; /* Esconde o cursor padrão para usar o customizado */
+        }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background-color: var(--color-primary);
+        }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 2px solid rgba(99, 102, 241, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        
+        /* Efeitos Hover Globais no Cursor */
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline {
+            width: 60px; height: 60px;
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        /* Animações Complexas */
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .animate-blob { animation: blob 10s infinite alternate; }
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            100% { transform: translate(30px, -50px) scale(1.1); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #818cf8, #c084fc, #818cf8);
             background-size: 200% auto;
-            animation: textGradient 4s linear infinite;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 5s linear infinite;
         }
-        @keyframes textGradient {
-            to { background-position: 200% center; }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* Infinite Marquee Scroll */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            justify-content: space-around;
+            min-width: 100%;
+            animation: scroll 30s linear infinite;
+        }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 5px; border: 2px solid #020617; }
         ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
+
+        /* Glassmorphism Classes Extras */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Grid de Background */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased overflow-x-hidden">
+<body class="bg-grid relative">
 
-    <!-- Header com transição ao rolar (controlado via JS) -->
-    <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer hover:scale-105 transition-transform" data-aos="fade-down">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white text-xl shadow-lg shadow-indigo-500/30">V</div>
-                <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">Vincofer</span>
+    <!-- Custom Cursor DOM -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Header Glassmorphism -->
+    <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 py-4 border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer group">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center font-bold text-white text-2xl shadow-[0_0_20px_rgba(99,102,241,0.4)] group-hover:rotate-12 transition-all duration-300">V</div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-extrabold tracking-tight text-white leading-none">Vincofer</span>
+                    <span class="text-[10px] text-indigo-400 font-semibold tracking-[0.2em] uppercase">Creative Agency</span>
+                </div>
             </div>
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300" data-aos="fade-down" data-aos-delay="100">
-                <a href="#servicos" class="hover:text-white hover:-translate-y-0.5 transition-all">Serviços</a>
-                <a href="#sobre" class="hover:text-white hover:-translate-y-0.5 transition-all">Sobre</a>
-                <a href="#depoimentos" class="hover:text-white hover:-translate-y-0.5 transition-all">Depoimentos</a>
-                <a href="#contato" class="hover:text-white hover:-translate-y-0.5 transition-all">Contato</a>
+            
+            <nav class="hidden lg:flex items-center gap-10 bg-slate-900/50 backdrop-blur-md px-8 py-3 rounded-full border border-slate-800/50 shadow-xl">
+                <a href="#servicos" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors relative group">
+                    Expertise
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#portfolio" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors relative group">
+                    Portfólio
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#calculadora" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors relative group">
+                    ROI
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#news" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors relative group">
+                    Insights
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+                </a>
             </nav>
-            <a href="https://wa.me/5511996928309" target="_blank" data-aos="fade-down" data-aos-delay="200" 
-               class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all hover:scale-105 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/50">
-                Falar no WhatsApp
+
+            <a href="https://wa.me/5511996928309" target="_blank" class="hidden md:flex items-center gap-2 bg-white text-slate-950 px-6 py-3 rounded-full font-bold text-sm hover:bg-slate-200 hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                <i class="ph-fill ph-whatsapp-logo text-xl text-green-600"></i>
+                Iniciar Projeto
             </a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="pt-40 pb-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-screen">
-        <div data-aos="fade-right" data-aos-duration="1000">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-6 hover:bg-indigo-500/20 transition-colors cursor-default">
-                <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
-                Marketing Digital & Tráfego Pago
-            </span>
-            <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight text-white mb-6">
-                Aceleramos o crescimento da sua marca com 
-                <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-gradient">
-                    estratégias de alta performance
-                </span>.
-            </h1>
-            <p class="text-slate-400 text-lg mb-8 leading-relaxed">
-                Gestão de tráfego, criação de conteúdo e presença digital focada na geração contínua de leads e vendas para o seu negócio.
+    <!-- 1. HERO SECTION COMPLEXA -->
+    <section class="relative pt-40 pb-32 px-6 min-h-[100vh] flex items-center justify-center overflow-hidden">
+        <!-- Elementos de Background -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div data-aos="fade-right" data-aos-duration="1200">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-indigo-300 text-xs font-bold uppercase tracking-widest mb-8">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                    </span>
+                    Soluções 360º de Alta Performance
+                </div>
+                
+                <h1 class="text-5xl sm:text-7xl font-extrabold leading-[1.1] text-white mb-8 tracking-tight">
+                    Design e Dados.<br>
+                    A fusão que <span class="text-gradient">escala negócios.</span>
+                </h1>
+                
+                <p class="text-slate-400 text-xl mb-10 leading-relaxed font-light max-w-xl">
+                    Da direção de arte sofisticada à gestão de tráfego de precisão. Conectamos o audiovisual imersivo com estratégias de conversão agressivas.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="#portfolio" class="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-xl font-bold text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:-translate-y-1">
+                        Ver Nosso Trabalho
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                    <a href="#calculadora" class="glass-card hover:bg-white/5 text-white px-8 py-4 rounded-xl font-bold text-center transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
+                        <i class="ph-bold ph-calculator"></i>
+                        Calcular ROI Estimado
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dashboard Mockup Interativo -->
+            <div class="relative w-full h-[500px]" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <div class="absolute inset-0 glass-card rounded-2xl border border-slate-700/50 p-2 animate-float shadow-2xl">
+                    <div class="w-full h-full bg-slate-900 rounded-xl overflow-hidden relative">
+                        <!-- Topbar UI -->
+                        <div class="h-10 bg-slate-800/80 flex items-center px-4 gap-2">
+                            <div class="flex gap-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="mx-auto bg-slate-900 rounded-md px-4 py-1 text-xs text-slate-400 font-mono">vincofer-ads-manager.exe</div>
+                        </div>
+                        <!-- Imagem do painel -->
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Dashboard" class="w-full h-[calc(100%-2.5rem)] object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700">
+                        
+                        <!-- Floating Stats UI -->
+                        <div class="absolute bottom-6 right-6 glass-card p-4 rounded-xl border border-indigo-500/30">
+                            <p class="text-xs text-indigo-300 font-bold uppercase mb-1">ROAS Atual</p>
+                            <p class="text-3xl font-extrabold text-white">4.8x <span class="text-green-400 text-sm">↑ 12%</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. MARQUEE INFINITO (Social Proof) -->
+    <section class="py-10 border-y border-slate-800/50 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6 mb-6 text-center">
+            <p class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Plataformas & Tecnologias Dominadas</p>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee-content gap-16 items-center text-3xl text-slate-600 font-bold">
+                <span>Google Ads</span><span>•</span>
+                <span>Meta Ads</span><span>•</span>
+                <span>TikTok For Business</span><span>•</span>
+                <span>Adobe Premiere</span><span>•</span>
+                <span>Avid Media Composer</span><span>•</span>
+                <span>Modelagem 3D</span><span>•</span>
+                <span>Google Analytics 4</span><span>•</span>
+                <span>Figma</span>
+            </div>
+            <!-- Duplicado para loop perfeito -->
+            <div class="marquee-content gap-16 items-center text-3xl text-slate-600 font-bold" aria-hidden="true">
+                <span>Google Ads</span><span>•</span>
+                <span>Meta Ads</span><span>•</span>
+                <span>TikTok For Business</span><span>•</span>
+                <span>Adobe Premiere</span><span>•</span>
+                <span>Avid Media Composer</span><span>•</span>
+                <span>Modelagem 3D</span><span>•</span>
+                <span>Google Analytics 4</span><span>•</span>
+                <span>Figma</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. EXPERTISE & SERVIÇOS (Grid Complexo) -->
+    <section id="servicos" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8" data-aos="fade-up">
+            <div class="max-w-2xl">
+                <h2 class="text-sm font-bold text-indigo-500 uppercase tracking-widest mb-3">Nossa Expertise</h2>
+                <h3 class="text-4xl sm:text-5xl font-extrabold text-white">Ecossistema criativo focado em conversão total.</h3>
+            </div>
+            <p class="text-slate-400 max-w-md text-lg">
+                Não somos apenas uma agência de tráfego. Somos uma produtora de conteúdo, diretores de arte e cientistas de dados.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#contato" class="bg-indigo-600 hover:bg-indigo-500 hover:-translate-y-1 text-white px-8 py-4 rounded-xl font-bold text-center transition-all shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50">
-                    Solicitar Proposta
-                </a>
-                <a href="#servicos" class="bg-slate-900 border border-slate-800 hover:border-slate-600 hover:bg-slate-800 hover:-translate-y-1 text-slate-200 px-8 py-4 rounded-xl font-bold text-center transition-all">
-                    Ver Serviços
-                </a>
-            </div>
         </div>
-        <div class="relative" data-aos="fade-left" data-aos-duration="1000">
-            <!-- Glow effect de fundo animado indiretamente -->
-            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 blur-2xl opacity-30 animate-pulse duration-1000"></div>
-            <!-- Imagem com animação CSS customizada de flutuação -->
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" 
-                 alt="Dashboard de Marketing Digital Vincofer" 
-                 class="animate-float relative rounded-2xl border border-slate-700/50 shadow-2xl w-full object-cover h-[420px] transition-transform duration-500 hover:scale-[1.02]">
-        </div>
-    </section>
 
-    <!-- Métricas -->
-    <section class="border-y border-slate-800/80 bg-slate-900/40 py-12 relative overflow-hidden">
-        <!-- Decorador sutil -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div data-aos="zoom-in" data-aos-delay="0" class="hover:scale-105 transition-transform cursor-default">
-                <div class="text-3xl sm:text-5xl font-extrabold text-white mb-1 tracking-tight">+R$ 10M</div>
-                <div class="text-slate-400 text-sm font-medium uppercase tracking-wide">Geridos em Tráfego</div>
-            </div>
-            <div data-aos="zoom-in" data-aos-delay="100" class="hover:scale-105 transition-transform cursor-default">
-                <div class="text-3xl sm:text-5xl font-extrabold text-white mb-1 tracking-tight">+150</div>
-                <div class="text-slate-400 text-sm font-medium uppercase tracking-wide">Empresas Atendidas</div>
-            </div>
-            <div data-aos="zoom-in" data-aos-delay="200" class="hover:scale-105 transition-transform cursor-default">
-                <div class="text-3xl sm:text-5xl font-extrabold text-white mb-1 tracking-tight">98%</div>
-                <div class="text-slate-400 text-sm font-medium uppercase tracking-wide">Retenção de Clientes</div>
-            </div>
-            <div data-aos="zoom-in" data-aos-delay="300" class="hover:scale-105 transition-transform cursor-default">
-                <div class="text-3xl sm:text-5xl font-extrabold text-white mb-1 tracking-tight">4.9/5</div>
-                <div class="text-slate-400 text-sm font-medium uppercase tracking-wide">Avaliação Média</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Serviços -->
-    <section id="servicos" class="py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
-        <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Soluções para alavancar seu negócio</h2>
-            <p class="text-slate-400">Estratégias sob medida para captar clientes qualificados e fortalecer sua marca no mercado.</p>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div data-aos="fade-up" data-aos-delay="100" class="group bg-slate-900/60 border border-slate-800 p-8 rounded-2xl hover:bg-slate-800/80 hover:border-indigo-500/50 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10 cursor-pointer relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-2xl mb-6 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all">🎯</div>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors">Tráfego Pago (Ads)</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">Campanhas otimizadas no Google Ads, Meta Ads e TikTok Ads direcionadas para o seu público ideal.</p>
-            </div>
-
-            <!-- Card 2 -->
-            <div data-aos="fade-up" data-aos-delay="200" class="group bg-slate-900/60 border border-slate-800 p-8 rounded-2xl hover:bg-slate-800/80 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10 cursor-pointer relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-2xl mb-6 group-hover:scale-110 group-hover:bg-purple-500/20 transition-all">🎨</div>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">Criativos & Social Media</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">Produção de anúncios em vídeo, artes visuais e gestão estratégica de redes sociais.</p>
-            </div>
-
-            <!-- Card 3 -->
-            <div data-aos="fade-up" data-aos-delay="300" class="group bg-slate-900/60 border border-slate-800 p-8 rounded-2xl hover:bg-slate-800/80 hover:border-pink-500/50 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10 cursor-pointer relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center font-bold text-2xl mb-6 group-hover:scale-110 group-hover:bg-pink-500/20 transition-all">💻</div>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors">Landing Pages & Sites</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">Páginas de alta conversão, rápidas, modernas e otimizadas para transformar visitantes em clientes.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contato -->
-    <section id="contato" class="py-24 px-6 relative overflow-hidden scroll-mt-10">
-        <!-- Background Blur/Glow da seção -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-64 bg-indigo-600/20 blur-[100px] rounded-full pointer-events-none"></div>
-        
-        <div class="max-w-4xl mx-auto text-center relative z-10" data-aos="zoom-in">
-            <h2 class="text-3xl sm:text-5xl font-bold text-white mb-6">Pronto para transformar sua presença digital?</h2>
-            <p class="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">Entre em contato conosco e receba uma análise inicial estratégica gratuita para o tráfego da sua marca.</p>
-            
-            <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <a href="mailto:contato@vincofer.com" class="group bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-3">
-                    <svg class="w-5 h-5 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    Enviar E-mail
-                </a>
-                <a href="https://wa.me/5511996928309" target="_blank" class="group bg-emerald-600 hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-600/30 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-3">
-                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.993L2 22l5.233-1.237a9.994 9.994 0 004.779 1.216h.004c5.502 0 9.985-4.48 9.985-9.984C22.001 6.482 17.516 2 12.012 2zM12.016 19.957h-.003a8.125 8.125 0 01-4.14-1.127l-.297-.176-3.078.727.739-2.993-.193-.307a8.143 8.143 0 01-1.246-4.326c0-4.49 3.655-8.145 8.15-8.145 4.494 0 8.149 3.654 8.149 8.144-.001 4.49-3.654 8.146-8.148 8.146zm4.47-6.108c-.244-.122-1.45-.716-1.674-.799-.224-.082-.387-.122-.551.122-.163.245-.632.798-.775.96-.142.163-.285.184-.529.062-2.023-.972-3.153-1.89-4.223-3.705-.143-.243.14-.23.619-.71.123-.122.245-.245.367-.367.123-.123.164-.245.245-.408.082-.163.041-.306-.02-.429-.062-.122-.551-1.325-.755-1.815-.203-.488-.41-.422-.551-.43-.141-.006-.305-.008-.47-.008a.908.908 0 00-.653.306c-.224.245-.857.836-.857 2.039s.877 2.366 1 2.529c.122.164 1.724 2.632 4.175 3.692 1.488.643 2.158.535 2.96.444.887-.1 2.222-.907 2.535-1.785.312-.876.312-1.63.224-1.785-.083-.153-.306-.245-.55-.367z"></path></svg>
-                    Chamar no WhatsApp
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="border-t border-slate-800/60 bg-slate-950 py-12 px-6 text-slate-400 text-sm">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <p class="font-bold text-white text-base mb-2">Vincofer Marketing Digital</p>
-                <p class="flex items-center gap-2 justify-center md:justify-start">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    Avenida Winston Churchill, 1477 — São Bernardo do Campo - SP
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Serviço 1 -->
+            <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-duration-500"></div>
+                <div class="w-14 h-14 rounded-xl bg-slate-800 flex items-center justify-center mb-8 border border-slate-700 group-hover:border-indigo-500 transition-colors text-3xl text-indigo-400">
+                    <i class="ph ph-target"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-white mb-4">Tráfego de Performance</h4>
+                <p class="text-slate-400 leading-relaxed">
+                    Estruturação e escala de campanhas em Google, Meta e TikTok. Otimização implacável focada no Custo por Aquisição (CPA).
                 </p>
             </div>
-            <p>© 2026 Vincofer. Todos os direitos reservados.</p>
+
+            <!-- Serviço 2 -->
+            <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-duration-500"></div>
+                <div class="w-14 h-14 rounded-xl bg-slate-800 flex items-center justify-center mb-8 border border-slate-700 group-hover:border-purple-500 transition-colors text-3xl text-purple-400">
+                    <i class="ph ph-video-camera"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-white mb-4">Pós-Produção & Vídeo</h4>
+                <p class="text-slate-400 leading-relaxed">
+                    Edição audiovisual cinemática e criativos dinâmicos utilizando Premiere e Avid Media Composer para reter a atenção do usuário nos primeiros 3 segundos.
+                </p>
+            </div>
+
+            <!-- Serviço 3 -->
+            <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden lg:col-span-1 md:col-span-2" data-aos="fade-up" data-aos-delay="300">
+                <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-duration-500"></div>
+                <div class="w-14 h-14 rounded-xl bg-slate-800 flex items-center justify-center mb-8 border border-slate-700 group-hover:border-pink-500 transition-colors text-3xl text-pink-400">
+                    <i class="ph ph-cube"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-white mb-4">Direção de Arte & 3D</h4>
+                <p class="text-slate-400 leading-relaxed">
+                    Do webdesign imersivo à prototipagem 3D. Criamos identidades visuais e assets gráficos que elevam o valor percebido da sua marca a níveis premium.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PORTFÓLIO & CASOS DE SUCESSO (Design Avançado) -->
+    <section id="portfolio" class="py-32 bg-slate-900/50 border-y border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-sm font-bold text-purple-500 uppercase tracking-widest mb-3">Casos de Sucesso</h2>
+                <h3 class="text-4xl sm:text-5xl font-extrabold text-white">Trabalhos que falam por si.</h3>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-10">
+                
+                <!-- Case 1: Automotivo -->
+                <div class="group relative rounded-3xl overflow-hidden glass-card cursor-pointer" data-aos="fade-right">
+                    <div class="h-80 w-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-slate-900/40 z-10 group-hover:bg-transparent transition-all duration-500"></div>
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80" alt="Carro Esportivo de Alta Performance" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 relative z-20 bg-slate-900/90 backdrop-blur-xl border-t border-slate-800 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-bold text-slate-300">Veículos Premium</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-bold text-slate-300">Mídia Paga</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-2">Campanha "Alta Performance"</h4>
+                        <p class="text-slate-400 mb-6 line-clamp-2">Lançamento digital para concessionária de veículos de luxo e motocicletas pesadas. Foco em segmentação de alto poder aquisitivo no Meta Ads, resultando em ROI de 6.2x em 45 dias.</p>
+                        <span class="text-indigo-400 font-bold flex items-center gap-2 group-hover:gap-4 transition-all">Ver Estudo de Caso <i class="ph-bold ph-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- Case 2: Educação Audiovisual -->
+                <div class="group relative rounded-3xl overflow-hidden glass-card cursor-pointer" data-aos="fade-left" data-aos-delay="200">
+                    <div class="h-80 w-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-slate-900/40 z-10 group-hover:bg-transparent transition-all duration-500"></div>
+                        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80" alt="Estúdio de Gravação Audiovisual" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 relative z-20 bg-slate-900/90 backdrop-blur-xl border-t border-slate-800 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-bold text-slate-300">Educação</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-bold text-slate-300">Pós-Produção</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-2">Projeto Institucional Educacional</h4>
+                        <p class="text-slate-400 mb-6 line-clamp-2">Gestão de tráfego, linha do tempo histórica e refinamento de copy para campanha de aniversário de instituição de ensino. Utilização de edição de vídeo pesada para criativos imersivos.</p>
+                        <span class="text-indigo-400 font-bold flex items-center gap-2 group-hover:gap-4 transition-all">Ver Estudo de Caso <i class="ph-bold ph-arrow-right"></i></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. O SEGREDO / "A COISA DIFERENTE": Calculadora de ROI Interativa JS -->
+    <section id="calculadora" class="py-32 px-6 max-w-7xl mx-auto relative">
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-900/20 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div class="grid lg:grid-cols-5 gap-12 items-center">
+            <div class="lg:col-span-2" data-aos="fade-right">
+                <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-4xl text-indigo-400 mb-6 border border-indigo-500/20">
+                    <i class="ph-fill ph-magic-wand"></i>
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-6">Simule seu <br>Crescimento.</h2>
+                <p class="text-slate-400 text-lg mb-8">
+                    Brinque com os números abaixo. Descubra qual seria o impacto real no seu faturamento se otimizássemos sua taxa de conversão e seu ticket médio.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3 text-slate-300"><i class="ph-fill ph-check-circle text-green-500 text-xl"></i> Projeção baseada em dados reais</li>
+                    <li class="flex items-center gap-3 text-slate-300"><i class="ph-fill ph-check-circle text-green-500 text-xl"></i> Análise de funil de vendas</li>
+                    <li class="flex items-center gap-3 text-slate-300"><i class="ph-fill ph-check-circle text-green-500 text-xl"></i> Estimativa de ROAS</li>
+                </ul>
+            </div>
+
+            <!-- Calculadora UI -->
+            <div class="lg:col-span-3 glass-card p-8 sm:p-10 rounded-3xl border border-slate-700 shadow-2xl relative z-10" data-aos="fade-left">
+                <div class="space-y-8">
+                    
+                    <!-- Input: Verba -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="font-bold text-slate-300">Verba Mensal de Anúncios</label>
+                            <span class="text-indigo-400 font-mono font-bold" id="valVerba">R$ 5.000</span>
+                        </div>
+                        <input type="range" id="rangeVerba" min="1000" max="50000" step="500" value="5000" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    </div>
+
+                    <!-- Input: Custo por Clique (CPC) -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="font-bold text-slate-300">Custo por Clique (CPC)</label>
+                            <span class="text-indigo-400 font-mono font-bold" id="valCPC">R$ 1,50</span>
+                        </div>
+                        <input type="range" id="rangeCPC" min="0.10" max="10" step="0.10" value="1.50" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    </div>
+
+                    <!-- Input: Taxa de Conversão -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="font-bold text-slate-300">Taxa de Conversão do Site</label>
+                            <span class="text-indigo-400 font-mono font-bold" id="valTaxa">2,0%</span>
+                        </div>
+                        <input type="range" id="rangeTaxa" min="0.1" max="10" step="0.1" value="2.0" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    </div>
+
+                    <!-- Input: Ticket Médio -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="font-bold text-slate-300">Ticket Médio (Valor da Venda)</label>
+                            <span class="text-indigo-400 font-mono font-bold" id="valTicket">R$ 350</span>
+                        </div>
+                        <input type="range" id="rangeTicket" min="50" max="5000" step="50" value="350" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    </div>
+
+                    <div class="h-px w-full bg-slate-800 my-6"></div>
+
+                    <!-- Resultados -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                            <p class="text-xs text-slate-500 font-bold uppercase mb-1">Vendas Estimadas</p>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white" id="resVendas">66</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-indigo-600 to-purple-700 p-4 rounded-xl border border-indigo-400/50 shadow-lg shadow-indigo-500/20">
+                            <p class="text-xs text-indigo-200 font-bold uppercase mb-1">Retorno (Faturamento)</p>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-white" id="resFaturamento">R$ 23.333</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. BLOG & NOTÍCIAS (Conteúdo Gerado) -->
+    <section id="news" class="py-32 bg-slate-900/30 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-16" data-aos="fade-up">
+                <div>
+                    <h2 class="text-sm font-bold text-indigo-500 uppercase tracking-widest mb-3">Radar Vincofer</h2>
+                    <h3 class="text-4xl font-extrabold text-white">Últimas Tendências.</h3>
+                </div>
+                <a href="#" class="hidden sm:flex text-indigo-400 font-bold items-center gap-2 hover:text-white transition-colors">
+                    Ver todos os artigos <i class="ph-bold ph-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Notícia 1 -->
+                <article class="glass-card rounded-2xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" alt="IA Generativa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-indigo-400 mb-3 block">Tecnologia & IA • Março 2026</span>
+                        <h4 class="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">O impacto da IA Generativa na Criação de Campanhas no Meta Ads</h4>
+                        <p class="text-slate-400 text-sm line-clamp-3">Como a inteligência artificial está substituindo testes A/B demorados por otimizações preditivas em tempo real dentro do gerenciador de anúncios.</p>
+                    </div>
+                </article>
+
+                <!-- Notícia 2 -->
+                <article class="glass-card rounded-2xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Fim dos Cookies" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-purple-400 mb-3 block">Tráfego Pago • Fevereiro 2026</span>
+                        <h4 class="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">A era Cookieless chegou: Como rastrear conversões em 2026</h4>
+                        <p class="text-slate-400 text-sm line-clamp-3">Estratégias de Server-Side Tracking e uso de First-Party Data para não perder inteligência nas campanhas do Google e TikTok Ads.</p>
+                    </div>
+                </article>
+
+                <!-- Notícia 3 -->
+                <article class="glass-card rounded-2xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?auto=format&fit=crop&w=800&q=80" alt="Design UI/UX" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-pink-400 mb-3 block">Design & CRO • Janeiro 2026</span>
+                        <h4 class="text-xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors">Micro-interações: O detalhe que aumenta as vendas em 30%</h4>
+                        <p class="text-slate-400 text-sm line-clamp-3">Um estudo aprofundado sobre como animações sutis, glassmorphism e design voltado para o usuário estão definindo quem domina o mercado digital.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER MASSIVO -->
+    <footer class="bg-[#01040f] pt-24 pb-12 border-t border-slate-800/80 relative overflow-hidden">
+        <!-- Partículas de Fundo Footer -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-indigo-900/10 blur-[150px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+                <!-- Branding -->
+                <div class="lg:col-span-4">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white text-xl">V</div>
+                        <span class="text-2xl font-extrabold tracking-tight text-white">Vincofer</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Agência criativa e de performance. Combinamos análise de dados, modelagem avançada e estratégias de anúncios multiplataforma para escalar o seu faturamento.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500 transition-all"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500 transition-all"><i class="ph-fill ph-linkedin-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500 transition-all"><i class="ph-fill ph-behance-logo text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="lg:col-span-2 lg:col-start-7">
+                    <h5 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Serviços</h5>
+                    <ul class="space-y-3 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Gestão de Tráfego</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Direção de Arte</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Pós-Produção de Vídeo</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Criação de Sites (CRO)</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Animação 3D</a></li>
+                    </ul>
+                </div>
+
+                <!-- Empresa -->
+                <div class="lg:col-span-2">
+                    <h5 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Empresa</h5>
+                    <ul class="space-y-3 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Sobre Nós</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Casos de Sucesso</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Blog & Insights</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div class="lg:col-span-2">
+                    <h5 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Contato</h5>
+                    <ul class="space-y-3 text-slate-400 text-sm">
+                        <li class="flex gap-2"><i class="ph-fill ph-map-pin mt-1 text-indigo-400"></i> Av. Winston Churchill, 1477<br>São Bernardo do Campo, SP</li>
+                        <li class="flex items-center gap-2"><i class="ph-fill ph-envelope-simple text-indigo-400"></i> contato@vincofer.com</li>
+                        <li class="flex items-center gap-2"><i class="ph-fill ph-whatsapp-logo text-indigo-400"></i> +55 (11) 99692-8309</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800/80 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-xs">© 2026 Vincofer. Todos os direitos reservados. CNPJ: XX.XXX.XXX/0001-XX</p>
+                <div class="flex items-center gap-2 text-slate-500 text-xs">
+                    Desenvolvido com <i class="ph-fill ph-heart text-red-500"></i> por Vinícius F.
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts da Página -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Inicializa a biblioteca de animações
+        // 1. Inicializa o AOS Animações
         AOS.init({
-            once: true, // A animação ocorre apenas uma vez (ao rolar pra baixo)
-            offset: 100, // Dispara a animação 100px antes do elemento aparecer
-            duration: 800, // Tempo da animação em milissegundos
+            once: true,
+            offset: 50,
+            duration: 800,
             easing: 'ease-out-cubic',
         });
 
-        // Script para adicionar fundo (backdrop) ao Header quando rolar a página
+        // 2. Lógica do Header (Glassmorphism no Scroll)
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
-                navbar.classList.add('bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
-                navbar.classList.remove('bg-transparent', 'border-transparent');
+                navbar.classList.add('bg-slate-950/80', 'backdrop-blur-xl', 'border-slate-800', 'shadow-2xl');
+                navbar.classList.remove('border-transparent', 'py-4');
+                navbar.classList.add('py-2');
             } else {
-                navbar.classList.remove('bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
-                navbar.classList.add('bg-transparent', 'border-transparent');
+                navbar.classList.remove('bg-slate-950/80', 'backdrop-blur-xl', 'border-slate-800', 'shadow-2xl', 'py-2');
+                navbar.classList.add('border-transparent', 'py-4');
             }
         });
+
+        // 3. Custom Cursor Follower
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Suaviza o outline (delay no JS ou via CSS transition, mas aqui faremos via transform animation natural)
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 150, fill: "forwards" });
+        });
+
+        // 4. Lógica da Calculadora de ROI Interativa
+        const formatCurrency = (val) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(val);
+        const formatNumber = (val) => new Intl.NumberFormat('pt-BR').format(val);
+
+        const rVerba = document.getElementById('rangeVerba');
+        const rCPC = document.getElementById('rangeCPC');
+        const rTaxa = document.getElementById('rangeTaxa');
+        const rTicket = document.getElementById('rangeTicket');
+
+        const valVerba = document.getElementById('valVerba');
+        const valCPC = document.getElementById('valCPC');
+        const valTaxa = document.getElementById('valTaxa');
+        const valTicket = document.getElementById('valTicket');
+
+        const resVendas = document.getElementById('resVendas');
+        const resFaturamento = document.getElementById('resFaturamento');
+
+        function calcularROI() {
+            const verba = parseFloat(rVerba.value);
+            const cpc = parseFloat(rCPC.value);
+            const taxaConv = parseFloat(rTaxa.value) / 100;
+            const ticket = parseFloat(rTicket.value);
+
+            // Atualiza Labels Visualmente
+            valVerba.textContent = formatCurrency(verba);
+            valCPC.textContent = formatCurrency(cpc);
+            valTaxa.textContent = rTaxa.value.replace('.', ',') + '%';
+            valTicket.textContent = formatCurrency(ticket);
+
+            // Lógica Matemática
+            const cliques = verba / cpc;
+            const vendas = cliques * taxaConv;
+            const faturamento = vendas * ticket;
+
+            // Animação Simples de Atualização dos Números
+            resVendas.textContent = Math.floor(vendas);
+            resFaturamento.textContent = formatCurrency(faturamento);
+        }
+
+        // Listeners da Calculadora
+        [rVerba, rCPC, rTaxa, rTicket].forEach(input => {
+            input.addEventListener('input', calcularROI);
+        });
+
+        // Chamada Inicial
+        calcularROI();
+
     </script>
 </body>
 </html>
