@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case: IEBURIX 50 Anos | Portfólio Vincofer</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; cursor: none; overflow-x: hidden; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #6366f1; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(99, 102, 241, 0.5); transition: all 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(99, 102, 241, 0.1); }
+        .bg-hero { background-image: linear-gradient(to bottom, rgba(2,6,23,0.3), rgba(2,6,23,1)), url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed; }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <header class="w-full py-4 bg-transparent absolute top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform bg-black/40 backdrop-blur-md px-6 py-2 rounded-full border border-white/10">
+                <i class="ph-bold ph-arrow-left text-white text-xl"></i>
+                <span class="text-white font-bold text-xs uppercase tracking-widest">Voltar ao site</span>
+            </a>
+            <img src="logo.svg" alt="Vincofer" class="h-8 w-auto invert drop-shadow-2xl">
+        </div>
+    </header>
+
+    <!-- Hero Showcase -->
+    <section class="h-screen w-full bg-hero flex flex-col justify-end pb-24 px-6 relative">
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <div class="flex gap-3 mb-6">
+                <span class="bg-indigo-600 text-white px-4 py-1.5 rounded-md text-xs font-bold uppercase tracking-widest">Estudo de Caso</span>
+                <span class="bg-black/50 backdrop-blur border border-white/20 text-white px-4 py-1.5 rounded-md text-xs font-bold uppercase tracking-widest">Audiovisual & Educação</span>
+            </div>
+            <h1 class="text-5xl sm:text-7xl font-extrabold text-white mb-6 leading-tight max-w-4xl">Campanha de 50 Anos IEBURIX Barão de Mauá.</h1>
+            <p class="text-xl text-slate-300 max-w-2xl font-light">Como coordenamos a linha do tempo histórica, direção de arte e edição documental para honrar o meio século de uma instituição (1976 - 2026).</p>
+        </div>
+    </section>
+
+    <!-- O Desafio e A Solução -->
+    <section class="py-32 px-6 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16">
+            <div>
+                <h3 class="text-3xl font-extrabold text-white mb-6 flex items-center gap-4"><i class="ph-fill ph-film-strip text-indigo-500"></i> O Projeto e a Execução</h3>
+                <p class="text-slate-400 leading-relaxed text-lg mb-6">
+                    A missão era celebrar os 50 anos da fundação do IEBURIX. Atuamos como a mente estratégica por trás do projeto multimídia executado entre Janeiro e Abril de 2026, refinando a copy institucional e montando um cronograma de produção robusto.
+                </p>
+                <p class="text-slate-400 leading-relaxed text-lg">
+                    Construímos não apenas campanhas digitais, mas materiais documentais, exposições de linha do tempo, scripts promocionais e trabalhamos lado a lado com os coordenadores e até na direção criativa de turmas de alunos envolvidos na captação audiovisual. A ilha de edição trabalhou a todo vapor para trazer uma textura documental emocionante aos assets.
+                </p>
+            </div>
+            
+            <div class="bg-slate-900/60 p-8 rounded-3xl border border-slate-800 flex flex-col justify-center">
+                <h4 class="text-xl font-bold text-white mb-6">Entregáveis Chave</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <i class="ph-fill ph-check-circle text-green-500 text-xl mt-1"></i>
+                        <div>
+                            <strong class="text-slate-200 block">Exposição Line-of-Time</strong>
+                            <span class="text-slate-500 text-sm">Resumos históricos e assets comemorativos (1976-2026).</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="ph-fill ph-check-circle text-green-500 text-xl mt-1"></i>
+                        <div>
+                            <strong class="text-slate-200 block">Vídeo Institucional e Documental</strong>
+                            <span class="text-slate-500 text-sm">Direção, cronograma e pós-produção pesada.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="ph-fill ph-check-circle text-green-500 text-xl mt-1"></i>
+                        <div>
+                            <strong class="text-slate-200 block">Refinamento de Copywriter</strong>
+                            <span class="text-slate-500 text-sm">Escrita magnética voltada para a história e emoção da escola.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="py-32 bg-indigo-600 text-center px-6">
+        <h2 class="text-4xl font-extrabold text-white mb-8">Sua marca tem uma história para contar?</h2>
+        <a href="https://wa.me/5511996928309" target="_blank" class="bg-white text-indigo-600 hover:bg-slate-200 px-10 py-5 rounded-full font-bold text-lg transition-all inline-block">
+            Vamos planejar juntos
+        </a>
+    </section>
+
+    <footer class="bg-[#01040f] py-8 text-center text-slate-500 text-sm">
+        <p>© 2026 Vincofer. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
