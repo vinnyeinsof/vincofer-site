@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criação de Sites (CRO) | Vincofer</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; cursor: none; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #3b82f6; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(59, 130, 246, 0.5); transition: all 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(59, 130, 246, 0.1); }
+        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px); }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <header class="w-full py-6 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform group">
+                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-blue-600 transition-colors">
+                    <i class="ph-bold ph-arrow-left text-white text-xl"></i>
+                </div>
+                <span class="text-white font-bold tracking-wide">Voltar ao Início</span>
+            </a>
+            <img src="logo.svg" alt="Vincofer Logo" class="h-10 w-auto invert">
+        </div>
+    </header>
+
+    <section class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="w-20 h-20 rounded-2xl bg-blue-500/10 flex items-center justify-center text-5xl text-blue-400 mb-8 border border-blue-500/20">
+            <i class="ph-fill ph-browsers"></i>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white mb-8 leading-tight">Onde o Design encontra a Conversão.</h1>
+        
+        <div class="space-y-6 text-slate-400 text-lg leading-relaxed mb-12">
+            <p>
+                Ter um site bonito não é suficiente. Nós desenvolvemos plataformas, landing pages e e-commerces baseados nos princípios de <strong>CRO (Otimização da Taxa de Conversão)</strong>. Cada botão, texto e imagem é posicionado para guiar o olhar do cliente em direção à venda.
+            </p>
+            <p>
+                Utilizamos frameworks modernos (como o Tailwind CSS) e otimização pesada de servidores para garantir que sua página carregue na velocidade da luz. Sites lentos matam campanhas de tráfego pago; nós blindamos sua infraestrutura digital contra isso.
+            </p>
+        </div>
+
+        <div class="bg-slate-900/40 p-8 rounded-3xl border border-slate-800 mb-12">
+            <h3 class="text-white font-bold text-2xl mb-6">Características das nossas Landing Pages</h3>
+            <ul class="space-y-4">
+                <li class="flex items-center gap-4 text-slate-300"><i class="ph-fill ph-rocket-launch text-blue-500 text-xl"></i> Carregamento ultrarrápido (Score 90+ no Google PageSpeed)</li>
+                <li class="flex items-center gap-4 text-slate-300"><i class="ph-fill ph-device-mobile text-blue-500 text-xl"></i> Mobile First: Otimizado primeiro para smartphones</li>
+                <li class="flex items-center gap-4 text-slate-300"><i class="ph-fill ph-code text-blue-500 text-xl"></i> Infraestrutura limpa e preparada para SEO técnico</li>
+                <li class="flex items-center gap-4 text-slate-300"><i class="ph-fill ph-crosshair text-blue-500 text-xl"></i> Integração nativa com APIs de conversão (Meta e Google)</li>
+            </ul>
+        </div>
+
+        <a href="https://wa.me/5511996928309" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold transition-all inline-block shadow-lg shadow-blue-600/30">
+            Fazer orçamento do meu Site
+        </a>
+    </section>
+
+    <script>
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
