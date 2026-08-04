@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direção de Arte & 3D | Vincofer</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; cursor: none; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #ec4899; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(236, 72, 153, 0.5); transition: all 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(236, 72, 153, 0.1); }
+        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px); }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <header class="w-full py-6 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform group">
+                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-pink-600 transition-colors">
+                    <i class="ph-bold ph-arrow-left text-white text-xl"></i>
+                </div>
+                <span class="text-white font-bold tracking-wide">Voltar ao Início</span>
+            </a>
+            <img src="logo.svg" alt="Vincofer Logo" class="h-10 w-auto invert">
+        </div>
+    </header>
+
+    <section class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="w-20 h-20 rounded-2xl bg-pink-500/10 flex items-center justify-center text-5xl text-pink-400 mb-8 border border-pink-500/20">
+            <i class="ph-fill ph-cube"></i>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white mb-8 leading-tight">Identidade visual e imersão em três dimensões.</h1>
+        
+        <div class="space-y-6 text-slate-400 text-lg leading-relaxed mb-12">
+            <p>
+                O design de uma marca é o seu principal vendedor silencioso. Transformamos abstrações criativas em assets visuais com acabamento Premium. Atuamos fortemente na Direção de Arte e Webdesign, utilizando pacotes como Adobe CC e Figma para criar interfaces e campanhas publicitárias que se destacam visualmente.
+            </p>
+            <p>
+                Além disso, nossa expertise vai muito além do plano 2D. Realizamos o desenvolvimento de cenários, modelagem e animação de produtos em 3D, e atuamos até mesmo na engenharia reversa para <strong>prototipagem e impressão 3D avançada</strong>. Projetamos elementos de exibição físicos e digitais, construindo uma verdadeira imersão cross-media para o seu negócio.
+            </p>
+        </div>
+
+        <div class="bg-slate-900/40 p-8 rounded-3xl border border-slate-800 mb-12">
+            <h3 class="text-white font-bold text-2xl mb-6">Nossas Disciplinas Criativas</h3>
+            <ul class="space-y-4">
+                <li class="flex items-center gap-4 text-slate-300"><i class="ph-fill ph-check-circle text-pink-500 text-xl"></i> Criação de Identidade Visual e Rebranding</li>
+                <li class="flex items-center gap-4 text-slate-300"><i class="ph-fill ph-check-circle text-pink-500 text-xl"></i> UI/UX Design em Figma para Landing Pages</li>
+                <li class="flex items-center gap-4 text-slate-300"><i class="ph-fill ph-check-circle text-pink-500 text-xl"></i> Modelagem e Animação 3D para Produtos</li>
+                <li class="flex items-center gap-4 text-slate-300"><i class="ph-fill ph-check-circle text-pink-500 text-xl"></i> Prototipagem rápida </li>
+            </ul>
+        </div>
+
+        <a href="https://wa.me/5511996928309" target="_blank" class="bg-pink-600 hover:bg-pink-500 text-white px-8 py-4 rounded-xl font-bold transition-all inline-block shadow-lg shadow-pink-600/30">
+            Falar com a Equipe de Criação
+        </a>
+    </section>
+
+    <script>
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
