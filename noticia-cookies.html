@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A era Cookieless chegou | Vincofer Insights</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; overflow-x: hidden; cursor: none; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #a855f7; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(168, 85, 247, 0.5); transition: all 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(168, 85, 247, 0.1); }
+        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px); }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <header class="w-full py-4 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
+                <i class="ph-bold ph-arrow-left text-purple-500 text-2xl"></i>
+                <span class="text-white font-bold text-sm uppercase tracking-widest">Voltar</span>
+            </a>
+            <img src="logo.svg" alt="Vincofer" class="h-8 w-auto invert">
+        </div>
+    </header>
+
+    <section class="pt-24 pb-12 px-6 max-w-4xl mx-auto text-center" data-aos="fade-up">
+        <span class="text-purple-500 font-bold tracking-widest uppercase text-sm mb-4 block">Tráfego Pago & Dados</span>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white mb-8 leading-tight">A era Cookieless chegou: Como rastrear conversões em 2026</h1>
+        <div class="flex items-center justify-center gap-4 text-slate-400 text-sm">
+            <span>Por <strong>Equipe de Dados</strong></span> • <span>Tempo de leitura: 6 min</span> • <span>Fevereiro 2026</span>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-6 mb-16" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Dashboard de Dados" class="w-full h-[500px] object-cover rounded-3xl shadow-2xl border border-slate-800">
+    </div>
+
+    <article class="px-6 max-w-3xl mx-auto text-lg text-slate-300 space-y-8 leading-relaxed mb-32" data-aos="fade-up" data-aos-delay="200">
+        <p class="text-2xl text-white font-medium mb-8 leading-relaxed">
+            Se as suas campanhas de marketing digital estão sofrendo com a perda de inteligência e o aumento repentino do custo de aquisição, a culpa provável é da defasagem no rastreamento.
+        </p>
+
+        <p>
+            Com as atualizações rigorosas de privacidade do iOS e o bloqueio de cookies de terceiros pelos principais navegadores, depender exclusivamente do Pixel do Meta ou da tag do Google via navegador tornou-se uma estratégia amadora. Os dados se perdem no caminho, e o algoritmo fica "cego".
+        </p>
+
+        <h3 class="text-3xl text-white font-bold mt-12 mb-6">A Solução: Server-Side Tracking</h3>
+        <p>
+            A resposta definitiva da indústria é o Rastreamento via Servidor (API de Conversões). Em vez do navegador do usuário enviar a informação da compra para o Facebook, é o <strong>seu servidor</strong> que se comunica diretamente com o servidor da plataforma de anúncios.
+        </p>
+        
+        <p>
+            Isso elimina a dependência de cookies de terceiros, burla ad-blockers de forma legal e ética, e garante que 100% das vendas, leads e adições ao carrinho sejam computadas, devolvendo a inteligência que a campanha precisa para performar.
+        </p>
+
+        <div class="bg-slate-900/50 p-8 rounded-2xl border-l-4 border-purple-500 my-10">
+            <h4 class="text-xl font-bold text-white mb-3">O poder do First-Party Data</h4>
+            <p class="text-slate-400 text-base">Os dados primários (aqueles que o cliente fornece diretamente a você, como e-mail e telefone) são o novo ouro. Integrar o seu CRM diretamente às campanhas de anúncios é o diferencial entre escalar uma operação ou estagnar.</p>
+        </div>
+
+        <p>
+            Implementar uma infraestrutura de <em>Server-Side Tracking</em> exige conhecimento técnico avançado em configuração de nuvem e APIs. É exatamente esse grau de engenharia de dados que aplicamos na base das campanhas da Vincofer.
+        </p>
+    </article>
+
+    <footer class="bg-[#01040f] py-8 border-t border-slate-800 text-center text-slate-500 text-sm">
+        <p>© 2026 Vincofer. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 800 });
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
