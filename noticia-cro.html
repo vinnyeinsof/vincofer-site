@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro-interações no Design | Vincofer Insights</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; overflow-x: hidden; cursor: none; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #ec4899; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(236, 72, 153, 0.5); transition: all 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(236, 72, 153, 0.1); }
+        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px); }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <header class="w-full py-4 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform">
+                <i class="ph-bold ph-arrow-left text-pink-500 text-2xl"></i>
+                <span class="text-white font-bold text-sm uppercase tracking-widest">Voltar</span>
+            </a>
+            <img src="logo.svg" alt="Vincofer" class="h-8 w-auto invert">
+        </div>
+    </header>
+
+    <section class="pt-24 pb-12 px-6 max-w-4xl mx-auto text-center" data-aos="fade-up">
+        <span class="text-pink-500 font-bold tracking-widest uppercase text-sm mb-4 block">Design & CRO</span>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white mb-8 leading-tight">Micro-interações: O detalhe que aumenta as vendas em 30%</h1>
+        <div class="flex items-center justify-center gap-4 text-slate-400 text-sm">
+            <span>Por <strong>Direção de Arte</strong></span> • <span>Tempo de leitura: 5 min</span> • <span>Janeiro 2026</span>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-6 mb-16" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?auto=format&fit=crop&w=1200&q=80" alt="Design UX/UI" class="w-full h-[500px] object-cover rounded-3xl shadow-2xl border border-slate-800">
+    </div>
+
+    <article class="px-6 max-w-3xl mx-auto text-lg text-slate-300 space-y-8 leading-relaxed mb-32" data-aos="fade-up" data-aos-delay="200">
+        <p class="text-2xl text-white font-medium mb-8 leading-relaxed">
+            O design de uma landing page parou de ser apenas sobre "bonito ou feio". Hoje, a fronteira do design web é a neurociência aplicada à tela. É aqui que entram as micro-interações.
+        </p>
+
+        <p>
+            Uma micro-interação é aquele pequeno detalhe responsivo: um botão que afunda sutilmente ao ser clicado, um ícone que ganha um brilho (glow) quando o mouse passa por cima, ou um elemento de glassmorphism que reflete o movimento do scroll. Elas servem para dar um feedback instantâneo ao cérebro do usuário de que a ação dele foi compreendida pelo sistema.
+        </p>
+
+        <h3 class="text-3xl text-white font-bold mt-12 mb-6">Testes de Estresse em Alta Performance</h3>
+        <p>
+            Um erro comum no desenvolvimento de interfaces é construir páginas apenas para o padrão médio. Ao projetar páginas voltadas para conversão na Vincofer, testamos a fluidez do código não apenas em ambientes tradicionais, mas em ecossistemas de alta densidade de pixels.
+        </p>
+        <p>
+            A responsividade e a fluidez das animações precisam se comportar de forma perfeita tanto em setups avançados de produtividade (como monitores ultrawide de 32 polegadas), quanto na nova geração de displays, a exemplo de smartphones dobráveis da linha Z Fold6. Se a animação "engasga" nesses dispositivos, a quebra de expectativa gera atrito na jornada de compra.
+        </p>
+
+        <blockquote class="border-l-4 border-pink-500 pl-6 my-10 italic text-2xl text-pink-200 bg-slate-900/50 p-6 rounded-r-xl">
+            "A diferença entre uma página que converte a 1% e uma que converte a 5% não está no texto maior, está na ausência de fricção visual."
+        </blockquote>
+
+        <p class="mt-12">
+            A combinação de tipografias modernas, fundos com grid inteligente, cursores personalizados e animações de scroll transformam uma simples página de vendas em uma experiência imersiva pela qual o cliente quer pagar mais caro.
+        </p>
+    </article>
+
+    <footer class="bg-[#01040f] py-8 border-t border-slate-800 text-center text-slate-500 text-sm">
+        <p>© 2026 Vincofer. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 800 });
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
