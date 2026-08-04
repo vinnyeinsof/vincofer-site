@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pós-Produção & Vídeo | Vincofer</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; cursor: none; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #a855f7; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(168, 85, 247, 0.5); transition: all 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(168, 85, 247, 0.1); }
+        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px); }
+    </style>
+</head>
+<body class="bg-grid">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <header class="w-full py-6 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 hover:scale-105 transition-transform group">
+                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-purple-600 transition-colors">
+                    <i class="ph-bold ph-arrow-left text-white text-xl"></i>
+                </div>
+                <span class="text-white font-bold tracking-wide">Voltar ao Início</span>
+            </a>
+            <img src="logo.svg" alt="Vincofer Logo" class="h-10 w-auto invert">
+        </div>
+    </header>
+
+    <section class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="w-20 h-20 rounded-2xl bg-purple-500/10 flex items-center justify-center text-5xl text-purple-400 mb-8 border border-purple-500/20">
+            <i class="ph-fill ph-video-camera"></i>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white mb-8 leading-tight">Cortes cinemáticos que retêm a atenção.</h1>
+        
+        <div class="space-y-6 text-slate-400 text-lg leading-relaxed mb-12">
+            <p>
+                No ambiente digital hipercompetitivo, os primeiros 3 segundos de um vídeo decidem se a sua marca vai vender ou ser ignorada. Nossa abordagem de pós-produção não se limita a juntar clipes; nós aplicamos engenharia de retenção em cada frame.
+            </p>
+            <p>
+                Trabalhamos com estações de alta performance e dominamos fluxos pesados e profissionais na indústria audiovisual, utilizando <strong>Adobe Premiere Pro</strong> e <strong>Avid Media Composer</strong>. Isso nos permite entregar desde anúncios curtos e dinâmicos para TikTok e Reels, até documentários institucionais de alto padrão, tratamento de cor impecável e design de som imersivo.
+            </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6 mb-12">
+            <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                <i class="ph-bold ph-scissors text-3xl text-purple-400 mb-4 block"></i>
+                <h3 class="text-white font-bold text-xl mb-2">Edição Dinâmica</h3>
+                <p class="text-slate-500 text-sm">Cortes ágeis, motion graphics e transições baseadas na curva de atenção do usuário moderno.</p>
+            </div>
+            <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                <i class="ph-bold ph-aperture text-3xl text-purple-400 mb-4 block"></i>
+                <h3 class="text-white font-bold text-xl mb-2">Color Grading</h3>
+                <p class="text-slate-500 text-sm">Tratamento de cor cinematográfico para transmitir emoção e adequar o material ao branding da marca.</p>
+            </div>
+        </div>
+
+        <a href="https://wa.me/5511996928309" target="_blank" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-4 rounded-xl font-bold transition-all inline-block shadow-lg shadow-purple-600/30">
+            Solicitar Orçamento de Edição
+        </a>
+    </section>
+
+    <script>
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
